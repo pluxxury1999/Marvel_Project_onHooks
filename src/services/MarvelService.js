@@ -1,31 +1,24 @@
-class MarvelService {
-    _apiBase = 'https://gateway.marvel.com:443/v1/public/';
-    _apiKey = 'apikey=50b4bfb1baca5831950a81302bbdedf3';
-    _apiTS = 'ts=1'
-    _apiHash = 'hash=d7b8799fce6d4b5c7fdc5aa1fe57f524';
-    _baseOffset = 210;
+import {useHttp} from '../hooks/http.hook';
+const  useMarvelService = () => {
+    const {loading, request, error} = useHttp();
 
-    getResourse = async (url) => {
-        let res = await fetch(url);
+    const _apiBase = 'https://gateway.marvel.com:443/v1/public/';
+    const _apiKey = 'apikey=50b4bfb1baca5831950a81302bbdedf3';
+    const _apiTS = 'ts=1'
+    const _apiHash = 'hash=d7b8799fce6d4b5c7fdc5aa1fe57f524';
+    const _baseOffset = 210;
 
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-
-        return res.json();
-    };
-
-    getAllCharacters = async (offset = this._baseOffset) => {
-        const characters = await this.getResourse(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}&${this._apiTS}&${this._apiHash}`);
-        return characters.data.results.map(this._transformCharacter);
+    const getAllCharacters = async (offset = _baseOffset) => {
+        const characters = await request(`${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}&${_apiTS}&${_apiHash}`);
+        return characters.data.results.map(_transformCharacter);
     }
 
-    getCharacter = async (id) => {
-        const character = await this.getResourse(`${this._apiBase}characters/${id}?&${this._apiKey}&${this._apiTS}&${this._apiHash}`);
-        return this._transformCharacter(character.data.results[0]);
+    const getCharacter = async (id) => {
+        const character = await request(`${_apiBase}characters/${id}?&${_apiKey}&${_apiTS}&${_apiHash}`);
+        return _transformCharacter(character.data.results[0]);
     }
 
-    _transformCharacter = (character) => {
+    const _transformCharacter = (character) => {
         return {
             id: character.id,
             name: character.name,
@@ -36,6 +29,8 @@ class MarvelService {
             comics: character.comics.items,
         }
     }
+
+    return {loading, error, getAllCharacters, getCharacter}
 }
 
-export default MarvelService;
+export default useMarvelService;
