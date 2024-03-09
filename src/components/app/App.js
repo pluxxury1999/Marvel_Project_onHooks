@@ -20,7 +20,7 @@ const App = (props) => {
         <div className="app">
             <AppHeader/>
             <main>
-                {/* <ErrorBoundary>
+                <ErrorBoundary>
                     <RandomChar/>
                 </ErrorBoundary>
                 <div className="char__content">
@@ -31,9 +31,9 @@ const App = (props) => {
                         <CharInfo characterId={selectedCharacter}/>
                     </ErrorBoundary>
                 </div>
-                <img className="bg-decoration" src={decoration} alt="vision"/> */}
-                <AppBaner/>
-                <ComicsList/>
+                <img className="bg-decoration" src={decoration} alt="vision"/>
+                {/* <AppBaner/>
+                <ComicsList/> */}
             </main>
         </div>
     )    
