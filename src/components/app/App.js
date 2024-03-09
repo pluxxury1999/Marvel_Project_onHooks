@@ -8,7 +8,6 @@ import AppBaner from "../appBanner/AppBanner";
 import ComicsList from "../comicsList/ComicsList";
 
 import decoration from '../../resources/img/vision.png';
-import ComicsList from "../comicsList/ComicsList";
 
 const App = (props) => {
     const [selectedCharacter, setCharacter] = useState(null);
