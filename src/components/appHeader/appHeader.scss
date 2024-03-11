@@ -25,7 +25,13 @@
                 a:hover {
                     color: $main-color;
                 }
+                // a.active {
+                //     color: $main-color;
+                // }
             }
         }
+    }
+    &__link {
+        color: $main-color;
     }
 }
